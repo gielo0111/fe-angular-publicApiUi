@@ -1,0 +1,71 @@
+<h1>My Custom Table</h1>
+<br/>
+<div class='example-container mat-elevation-z8'>
+
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults || isRateLimitReached">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+      GitHub's API rate limit has been reached. It will be reset in one minute.
+    </div>
+  </div>
+
+  <div class="example-table-container">
+
+  <mat-table [dataSource]='data' matSort class='example-table' matSortActive="created" matSortDisableClear matSortDirection="desc">
+
+    <ng-container matColumnDef='API'>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>API</mat-header-cell>
+      <mat-cell *matCellDef='let element'> {{element.API}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef='Description'>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+      <mat-cell *matCellDef='let element'> {{element.Description}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef='Auth'>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Auth</mat-header-cell>
+      <mat-cell *matCellDef='let element'> {{element.Auth}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef='HTTPS'>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>HTTPS</mat-header-cell>
+      <mat-cell *matCellDef='let element'> {{element.HTTPS}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef='Cors'>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Cors</mat-header-cell>
+      <mat-cell *matCellDef='let element'> {{element.Cors}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef='Link'>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Link</mat-header-cell>
+      <mat-cell *matCellDef='let element'><a href='{{element.Link}}'> {{element.Link}}</a></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef='Category'>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
+      <mat-cell *matCellDef='let element'> {{element.Category}}</mat-cell>
+    </ng-container>
+
+    <!--
+      <ng-container matColumnDef='{{column.id}}' *ngFor='let column of columnNames'>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>{{column.value}}</mat-header-cell>
+    <mat-cell *matCellDef='let element'> {{element[column.id]}}</mat-cell>
+  </ng-container>
+    -->
+    <mat-header-row *matHeaderRowDef="headers"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: headers;"></mat-row>
+  </mat-table>
+
+
+</div>
+
+  <mat-paginator [length]="resultsLength" [pageSize]="10"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+
+</div>
+
